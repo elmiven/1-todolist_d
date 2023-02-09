@@ -16,10 +16,19 @@ function App() {
         { id: 4, title: "Redux", isDone: false },
     ]
 
+
+function removeTask (id: number) {
+    debugger
+    let resultTasks = tasks.filter( t => t.id !== id );
+    console.log(resultTasks)
+}
+
+
+
     //UI:
     return (
         <div className="App">
-            <TodoList title="What to learn" tasks={tasks} />
+            <TodoList title="What to learn" tasks={tasks} removeTasks={removeTask} />
         </div>
     );
 }
