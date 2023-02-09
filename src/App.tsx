@@ -1,15 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import {TodoList} from './Todolist';
+import { TodoList } from './Todolist';
 
 
-
-// BLL:
 function App() {
 
-    //const todoListTitle: string = "What to learn";
-
-    const tasks = [
+// BLL:
+    let initTasks = [
         { id: 1, title: "HTML & CSS", isDone: true },
         { id: 2, title: "ES6 & TS", isDone: false },
         { id: 3, title: "React", isDone: false },
@@ -17,18 +14,21 @@ function App() {
     ]
 
 
-function removeTask (id: number) {
-    debugger
-    let resultTasks = tasks.filter( t => t.id !== id );
-    console.log(resultTasks)
-}
+    let arr = useState(initTasks);
+    let tasks = arr[0];
+    let setTasks = arr[1];
 
 
+    function removeTask(id: number) {
+        let filteredTasks = tasks.filter(t => t.id !== id);
+        setTasks(filteredTasks);
+        console.log(filteredTasks);
+    }
 
     //UI:
     return (
         <div className="App">
-            <TodoList title="What to learn" tasks={tasks} removeTasks={removeTask} />
+            <TodoList title="What to learn" tasks={tasks} removeTask={removeTask} />
         </div>
     );
 }
