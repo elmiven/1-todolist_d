@@ -1,10 +1,12 @@
 import React from 'react';
+import { FilterValuesType } from './App';
 
 
 type PropsType = {
     title: string,
     tasks: TaskType[], //or better Array<TaskType> (generic)
-    removeTask: Function  //bad to desctibe type as Function 
+    removeTask: (id: number) => void  //bad to desctibe type as Function 
+    filteredTasks: (value: FilterValuesType) => void
 }
 
 export
@@ -38,9 +40,9 @@ export function TodoList(props: PropsType) {
 
 
         <div>
-            <button>All</button>
-            <button>Active</button>
-            <button>Completed</button>
+            <button onClick={ () => {props.filteredTasks("all")} }>All</button>
+            <button onClick={ () => {props.filteredTasks("completed")} }>Active</button>
+            <button onClick={ () => {props.filteredTasks("active")} }>Completed</button>
         </div>
     </div>
 
