@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { v1 } from 'uuid';
 import './App.css';
 import { TaskType, TodoList } from './Todolist';
 
@@ -14,11 +15,11 @@ function App() {
     // BLL:
 
     //useState for tasks
-    let [tasks, setTasks] = useState<Array<TaskType>>([
-        { id: 1, title: "HTML & CSS", isDone: true },
-        { id: 2, title: "ES6 & TS", isDone: false },
-        { id: 3, title: "React", isDone: false },
-        { id: 4, title: "Redux", isDone: false },
+    let [tasks, setTasks] = useState([
+        { id: v1(), title: "HTML & CSS", isDone: true },
+        { id: v1(), title: "ES6 & TS", isDone: false },
+        { id: v1(), title: "React", isDone: false },
+        { id: v1(), title: "Redux", isDone: false },
     ]);
 
     //useState for filter
@@ -31,11 +32,19 @@ function App() {
 
 
     //callback fn to delete tasks from useState
-    function removeTask(id: number) {
+    function removeTask(id: string) {
         let removedTask = tasks.filter(t => id !== t.id)
         setTasks(removedTask);
         console.log(removedTask);
     }
+
+
+    function addTask(title: string) {
+        let tasksNew = [...tasks, { id: v1(), title: title, isDone: false }]
+        setTasks(tasksNew)
+    }
+
+
 
 
 
@@ -64,6 +73,7 @@ function App() {
                 tasks={filteredTasks} //data props
                 removeTask={removeTask} //callback props to delete task
                 filteredTasks={changeFilter} //callback props 
+                addTask={addTask}
             />
 
         </div>
