@@ -46,7 +46,13 @@ function App() {
 
 
 
-
+    const  changeStatus = (taskId: string, isDone:boolean) => {
+        let task = tasks.find( t => t.id === taskId);
+        if (task) {
+        task.isDone = isDone;
+        }
+        setTasks([...tasks]);
+    }
 
     //callback fn to change filter useState
     function changeFilter(value: FilterValuesType) {
@@ -74,6 +80,8 @@ function App() {
                 removeTask={removeTask} //callback props to delete task
                 filteredTasks={changeFilter} //callback props 
                 addTask={addTask}
+                changeTaskStatus={changeStatus}
+                filter={filter}
             />
 
         </div>
